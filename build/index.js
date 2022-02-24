@@ -35,15 +35,17 @@ require("reflect-metadata");
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const bodyParser = __importStar(require("body-parser"));
+const dotenv = __importStar(require("dotenv"));
 const index_1 = __importDefault(require("./Application/controllers/todo/index"));
 const mongoconfig_1 = __importDefault(require("./Infrastructure/database/mongodb/mongoconfig"));
 //import sweggerui from "swagger-ui-express";
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const app = (0, express_1.default)();
-    const PORT = process.env.PORT || 4000;
+    dotenv.config();
+    const PORT = process.env.PORT || 7000;
     const con = new mongoconfig_1.default();
     con.Access();
-    const allowedOrigins = ['http://localhost:4000'];
+    const allowedOrigins = ['*'];
     const options = {
         origin: allowedOrigins
     };

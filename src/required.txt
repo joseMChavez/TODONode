@@ -14,4 +14,5 @@ Comand yarn
      yarn add json-schema-to-typescript
      npm i express dotenv cors helmet
      npm install body-parser
+     npm install dotenv --save
 
