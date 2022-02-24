@@ -2,16 +2,20 @@ import 'reflect-metadata';
 import express, { Express } from "express"
 import cors from "cors"
 import * as bodyParser from 'body-parser';
+import * as dotenv from "dotenv";
 import router from './Application/controllers/todo/index';
 import MongoDBConect from './Infrastructure/database/mongodb/mongoconfig';
 //import sweggerui from "swagger-ui-express";
 const main = async () => {
   const app:Express = express();
+  dotenv.config();
+  const PORT: string | number = process.env.PORT || 7000;
  
-  const PORT: string | number = process.env.PORT || 4000
   const con: MongoDBConect= new MongoDBConect();
   con.Access();
-  const allowedOrigins = ['http://localhost:4000'];
+
+  const allowedOrigins =['*'];
+  
   const options: cors.CorsOptions = {
     origin: allowedOrigins
   };
