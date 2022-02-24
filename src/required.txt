@@ -1,0 +1,15 @@
+Comand yarn
+  yarn init
+  yarn add typescript -g
+  yarn add express cors mongoose
+  yarn add -D @types/node @types/express @types/mongoose @types/cors
+  yarn add -D concurrently nodemon
+    Inject Dependency
+       npm install typedi reflect-metadata
+       npm i typedi
+  npm
+     npm install -g ts-node
+     npm i openapi-typescript
+     npm install swagger-ui-express --save 
+     yarn add json-schema-to-typescript
+

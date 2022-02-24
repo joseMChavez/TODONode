@@ -1,0 +1,12 @@
+{
+    "start:dev": "nodemon",
+    "watch": ["src"],
+    "ext": ".ts,.js",
+    "ignore": [],
+    "exec": "ts-node ./src/index.ts",
+    "env": {
+        "MONGO_USER": "your-username",
+        "MONGO_PASSWORD": "your-password",
+        "MONGO_DB": "TodoDb"
+    }
+  }
