@@ -25,6 +25,7 @@ let TodoService = class TodoService {
         return new Promise((resolve, rejects) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const _todo = new todo_1.default({
+                    _id: null,
                     name: todo.name,
                     description: todo.description,
                     status: todo.status
@@ -59,7 +60,7 @@ let TodoService = class TodoService {
                 resolve(deleteResult.deletedCount > 0);
             }
             catch (error) {
-                rejects([false, error]);
+                rejects(error);
             }
         }));
     }
@@ -72,15 +73,15 @@ let TodoService = class TodoService {
                 resolve(dTodo);
             }
             catch (error) {
-                rejects([null, error]);
+                rejects(error);
             }
         }));
     }
     GetAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            const dTodo = yield todo_1.default.find();
             return new Promise((resolve, rejects) => __awaiter(this, void 0, void 0, function* () {
                 try {
+                    const dTodo = yield todo_1.default.find();
                     resolve(dTodo);
                 }
                 catch (error) {

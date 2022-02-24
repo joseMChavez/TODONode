@@ -12,4 +12,6 @@ Comand yarn
      npm i openapi-typescript
      npm install swagger-ui-express --save 
      yarn add json-schema-to-typescript
+     npm i express dotenv cors helmet
+     npm install body-parser
 

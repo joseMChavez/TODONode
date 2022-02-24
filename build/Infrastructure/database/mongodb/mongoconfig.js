@@ -19,7 +19,7 @@ class MongoDBConect {
             const uri = "mongodb://localhost:27017/TodoDb"; ///= `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@clustertodo.raz9g.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`
             //const options = { useNewUrlParser: true, useUnifiedTopology: true }
             //mongoose.set("useFindAndModify", false)
-            yield mongoose_1.default.connect(uri)
+            mongoose_1.default.connect(uri)
                 .then(() => console.log("Estamos conectados..."))
                 .catch(error => {
                 throw error;

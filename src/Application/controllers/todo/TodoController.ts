@@ -31,6 +31,7 @@ export default class TodoController {
   }
   async PostTodo(_req: Request, res: Response){
     const body = _req.body as Pick<ITodo, "_id"|"name" | "description" | "status">;
+   
     const obj: ITodo= new Todo({
         _id:body._id,
         name:body.name,
@@ -59,6 +60,7 @@ export default class TodoController {
   }
   async DeleteTodo(_req: Request, res: Response){
     const body = _req.body as Pick<ITodo,"_id"| "name" | "description" | "status">;
+    console.log(_req.body._id);
     const obj: ITodo= new Todo({
         _id:body._id,
         name:body.name,

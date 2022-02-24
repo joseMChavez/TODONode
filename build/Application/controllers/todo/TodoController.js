@@ -87,6 +87,7 @@ let TodoController = class TodoController {
     DeleteTodo(_req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const body = _req.body;
+            console.log(_req.body._id);
             const obj = new todo_1.default({
                 _id: body._id,
                 name: body.name,

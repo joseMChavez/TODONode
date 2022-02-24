@@ -1,10 +1,11 @@
 import { ITodo } from "../types/todo"
 import { model, Schema } from "mongoose"
+import { ObjectId } from "mongodb";
 
 const todoSchema: Schema = new Schema(
   {
     _id: {
-      type: String,
+      type: ObjectId,
       required: false,
     },
     name: {

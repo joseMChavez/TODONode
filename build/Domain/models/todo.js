@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
+const mongodb_1 = require("mongodb");
 const todoSchema = new mongoose_1.Schema({
     _id: {
-        type: String,
+        type: mongodb_1.ObjectId,
         required: false,
     },
     name: {

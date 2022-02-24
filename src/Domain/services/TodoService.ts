@@ -16,6 +16,7 @@ export default class TodoService implements ITodoService{
           return new Promise(async (resolve,rejects) =>{
             try {
                 const _todo: ITodo = new Todo({
+                    _id:null,
                     name: todo.name,
                     description: todo.description,
                     status: todo.status
@@ -50,7 +51,7 @@ export default class TodoService implements ITodoService{
                 resolve(deleteResult.deletedCount>0);
               
               } catch (error) {
-                rejects([false,error]);
+                rejects(error);
               }
           });
     }
@@ -66,16 +67,16 @@ export default class TodoService implements ITodoService{
             resolve(dTodo);
           
           } catch (error) {
-            rejects([null,error]);
+            rejects(error);
           }
       });
     }
     public async GetAll(): Promise<ITodo[]> {
-      const dTodo: ITodo[] = await Todo.find();
+     
     return new Promise(async (resolve,rejects)  =>{
         try {
-            
-            resolve(dTodo );
+            const dTodo: ITodo[] = await Todo.find();
+            resolve(dTodo);
           
           } catch (error) {
             rejects(error);
