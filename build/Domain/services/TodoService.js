@@ -30,10 +30,10 @@ let TodoService = class TodoService {
                     status: todo.status
                 });
                 const newTodo = yield _todo.save();
-                resolve([newTodo, ""]);
+                resolve(newTodo);
             }
             catch (error) {
-                rejects([null, error]);
+                rejects(error);
             }
         }));
     }
@@ -44,10 +44,10 @@ let TodoService = class TodoService {
                 const update = { $set: { name: todo.name, status: todo.status, description: todo.description } };
                 const options = { upsert: true };
                 const updateTodo = yield todo_1.default.findOneAndUpdate(query, update, options);
-                resolve([updateTodo, ""]);
+                resolve(updateTodo);
             }
             catch (error) {
-                rejects([null, error]);
+                rejects(error);
             }
         }));
     }
@@ -56,7 +56,7 @@ let TodoService = class TodoService {
             try {
                 const query = { name: todo.name, _id: todo.id };
                 const deleteResult = yield todo_1.default.deleteOne(query);
-                resolve([deleteResult.deletedCount > 0, ""]);
+                resolve(deleteResult.deletedCount > 0);
             }
             catch (error) {
                 rejects([false, error]);
@@ -69,7 +69,7 @@ let TodoService = class TodoService {
                 const query = { name: todo.name, _id: todo._id };
                 const options = { upsert: true };
                 const dTodo = yield todo_1.default.findOne(query, options);
-                resolve([dTodo, ""]);
+                resolve(dTodo);
             }
             catch (error) {
                 rejects([null, error]);
@@ -78,13 +78,13 @@ let TodoService = class TodoService {
     }
     GetAll() {
         return __awaiter(this, void 0, void 0, function* () {
+            const dTodo = yield todo_1.default.find();
             return new Promise((resolve, rejects) => __awaiter(this, void 0, void 0, function* () {
                 try {
-                    const dTodo = yield todo_1.default.find();
-                    resolve([dTodo, ""]);
+                    resolve(dTodo);
                 }
                 catch (error) {
-                    rejects([null, error]);
+                    rejects(error);
                 }
             }));
         });

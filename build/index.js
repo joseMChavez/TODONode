@@ -17,6 +17,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const index_1 = __importDefault(require("./Application/controllers/todo/index"));
 const mongoconfig_1 = __importDefault(require("./Infrastructure/database/mongodb/mongoconfig"));
+//import sweggerui from "swagger-ui-express";
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const app = (0, express_1.default)();
     const PORT = process.env.PORT || 4000;
@@ -26,7 +27,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     app.use(index_1.default);
     //3000
     app.listen(PORT, () => {
-        console.log('Server started');
+        console.log('Server started....');
     });
 });
 main().catch(err => {

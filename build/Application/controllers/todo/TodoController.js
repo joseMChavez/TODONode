@@ -23,6 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const todo_1 = __importDefault(require("../../../Domain/models/todo"));
 const typedi_1 = require("typedi");
+const TodoService_1 = __importDefault(require("../../../Domain/services/TodoService"));
 let TodoController = class TodoController {
     constructor(Service) {
         this.Service = Service;
@@ -30,9 +31,9 @@ let TodoController = class TodoController {
     GetAllTodo(_req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.Service.GetAll().then((result) => {
-                return res.status(200).json(result[0]);
+                return res.status(200).json(result);
             }).catch((err) => {
-                return res.status(400).json({ error: err[1] });
+                return res.status(400).json(new Error(err));
             });
         });
     }
@@ -45,9 +46,9 @@ let TodoController = class TodoController {
                 status: false
             });
             yield this.Service.Get(obj).then((result) => {
-                return res.status(200).json(result[0]);
+                return res.status(200).json(result);
             }).catch((err) => {
-                return res.status(400).json({ error: err[1] });
+                return res.status(400).json({ error: err });
             });
         });
     }
@@ -61,9 +62,9 @@ let TodoController = class TodoController {
                 status: body.status
             });
             yield this.Service.Add(obj).then((result) => {
-                return res.status(200).json(result[0]);
+                return res.status(200).json(result);
             }).catch((err) => {
-                return res.status(400).json({ error: err[1] });
+                return res.status(400).json({ error: err });
             });
         });
     }
@@ -77,9 +78,9 @@ let TodoController = class TodoController {
                 status: body.status
             });
             yield this.Service.Update(obj).then((result) => {
-                return res.status(200).json(result[0]);
+                return res.status(200).json(result);
             }).catch((err) => {
-                return res.status(400).json({ error: err[1] });
+                return res.status(400).json({ error: err });
             });
         });
     }
@@ -93,15 +94,15 @@ let TodoController = class TodoController {
                 status: body.status
             });
             yield this.Service.Delete(obj).then((result) => {
-                return res.status(200).json(result[0]);
+                return res.status(200).json(result);
             }).catch((err) => {
-                return res.status(400).json({ error: err[1] });
+                return res.status(400).json({ error: err });
             });
         });
     }
 };
 TodoController = __decorate([
     (0, typedi_1.Service)(),
-    __metadata("design:paramtypes", [Object])
+    __metadata("design:paramtypes", [TodoService_1.default])
 ], TodoController);
 exports.default = TodoController;

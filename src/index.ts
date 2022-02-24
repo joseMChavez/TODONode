@@ -15,7 +15,7 @@ const main = async () => {
 
   //3000
   app.listen(PORT, () => {
-    console.log('Server started');
+    console.log('Server started....');
   });
 }
 

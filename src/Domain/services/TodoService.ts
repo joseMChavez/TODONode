@@ -2,7 +2,8 @@
 import { ITodo } from "../types/todo";
 import Todo from "../models/todo";
 import { Service } from "typedi";
-export interface ITodoService{
+
+export default interface ITodoService{
     Add(todo:ITodo): Promise<ITodo>;
     Update(todo:ITodo): Promise<ITodo>;
     Delete(todo:ITodo): Promise<boolean>;
@@ -11,7 +12,7 @@ export interface ITodoService{
 }
 @Service()
 export default class TodoService implements ITodoService{
-     Add(todo: ITodo): Promise<ITodo> {
+   public Add(todo: ITodo): Promise<ITodo> {
           return new Promise(async (resolve,rejects) =>{
             try {
                 const _todo: ITodo = new Todo({
@@ -27,7 +28,7 @@ export default class TodoService implements ITodoService{
               }
           });
     }
-     Update(todo: ITodo): Promise<ITodo> {
+    public Update(todo: ITodo): Promise<ITodo> {
         return new Promise(async (resolve,rejects)  =>{
             try {
                 const query = { name: todo.name,_id:todo._id };
@@ -41,7 +42,7 @@ export default class TodoService implements ITodoService{
               }
           });
     }
-    Delete(todo: ITodo): Promise<boolean> {
+    public Delete(todo: ITodo): Promise<boolean> {
           return new Promise(async (resolve,rejects)  =>{
             try {
                 const query = { name: todo.name,_id:todo.id };
@@ -53,7 +54,7 @@ export default class TodoService implements ITodoService{
               }
           });
     }
-    Get(todo: ITodo): Promise<ITodo> {
+    public Get(todo: ITodo): Promise<ITodo> {
     return new Promise(async (resolve,rejects)  =>{
         try {
             const query = { name: todo.name,_id:todo._id };
@@ -69,10 +70,11 @@ export default class TodoService implements ITodoService{
           }
       });
     }
-   async GetAll(): Promise<ITodo[]> {
+    public async GetAll(): Promise<ITodo[]> {
+      const dTodo: ITodo[] = await Todo.find();
     return new Promise(async (resolve,rejects)  =>{
         try {
-            const dTodo: ITodo[] = await Todo.find();
+            
             resolve(dTodo );
           
           } catch (error) {

@@ -2,7 +2,7 @@ import { Response, Request } from "express"
 import { ITodo } from "../../../Domain/types/todo"
 import Todo from "../../../Domain/models/todo"
 import { Service } from "typedi";
-import { ITodoService } from "../../../Domain/services/TodoService";
+import  ITodoService  from "../../../Domain/services/TodoService";
 
 
 @Service()
@@ -11,9 +11,9 @@ export default class TodoController {
  
   async GetAllTodo(_req: Request, res: Response) {
      await this.Service.GetAll().then((result)=>{
-        return res.status(200).json(result[0]);
+        return res.status(200).json(result);
      }).catch((err)=>{
-        return res.status(400).json({error:err[1]});
+        return res.status(400).json(new Error(err));
      });
   }
   async GetTodo(_req: Request, res: Response) {
