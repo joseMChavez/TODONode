@@ -1,18 +1,20 @@
 
-import { ITodo } from "../types/todo";
+import { BodyTodo,ITodo } from "../types/todo";
 import Todo from "../models/todo";
 import { Service } from "typedi";
 
 export default interface ITodoService{
-    Add(todo:ITodo): Promise<ITodo>;
-    Update(todo:ITodo): Promise<ITodo>;
-    Delete(todo:ITodo): Promise<boolean>;
-    Get(todo:ITodo): Promise<ITodo>;
+    Add(todo:BodyTodo): Promise<ITodo>;
+    Update(todo:BodyTodo): Promise<ITodo>;
+    Delete(todo:BodyTodo): Promise<boolean>;
+    Get(id:string): Promise<ITodo>;
     GetAll(): Promise<ITodo[]>;
 }
+
+
 @Service()
 export default class TodoService implements ITodoService{
-   public Add(todo: ITodo): Promise<ITodo> {
+   public Add(todo: BodyTodo): Promise<ITodo> {
           return new Promise(async (resolve,rejects) =>{
             try {
                 const _todo: ITodo = new Todo({
@@ -29,13 +31,13 @@ export default class TodoService implements ITodoService{
               }
           });
     }
-    public Update(todo: ITodo): Promise<ITodo> {
+    public Update(todo: BodyTodo): Promise<ITodo> {
         return new Promise(async (resolve,rejects)  =>{
             try {
                 const query = { name: todo.name,_id:todo._id };
                 const update = { $set: { name:todo.name, status: todo.status,description:todo.description }};
                 const options = {upsert:true};
-                const updateTodo: ITodo | any = await Todo.findOneAndUpdate(query,update,options);   
+                const updateTodo: BodyTodo | any = await Todo.findOneAndUpdate(query,update,options);   
                 resolve(updateTodo);
               
               } catch (error) {
@@ -43,10 +45,10 @@ export default class TodoService implements ITodoService{
               }
           });
     }
-    public Delete(todo: ITodo): Promise<boolean> {
+    public Delete(todo: BodyTodo): Promise<boolean> {
           return new Promise(async (resolve,rejects)  =>{
             try {
-                const query = { name: todo.name,_id:todo.id };
+                const query = { name: todo.name,_id:todo._id };
                 const deleteResult= await Todo.deleteOne(query);
                 resolve(deleteResult.deletedCount>0);
               
@@ -55,14 +57,14 @@ export default class TodoService implements ITodoService{
               }
           });
     }
-    public Get(todo: ITodo): Promise<ITodo> {
+    public Get(id:string): Promise<ITodo> {
     return new Promise(async (resolve,rejects)  =>{
         try {
-            const query = { name: todo.name,_id:todo._id };
+            const query = {_id: id };
            
             const options = {upsert:true};
 
-            const dTodo: ITodo | any = await Todo.findOne(query,options);
+            const dTodo: BodyTodo | any = await Todo.findOne(query,options);
               
             resolve(dTodo);
           

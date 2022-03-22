@@ -6,3 +6,4 @@ export  interface ITodo extends Document {
   description: string
   status: boolean
 }
+export type BodyTodo =  Pick<ITodo, "_id"|"name" | "description" | "status">;

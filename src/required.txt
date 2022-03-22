@@ -11,8 +11,12 @@ Comand yarn
      npm install -g ts-node
      npm i openapi-typescript
      npm install swagger-ui-express --save 
+     npm install @types/swagger-ui-express @types/swagger-jsdoc --save-dev
      yarn add json-schema-to-typescript
      npm i express dotenv cors helmet
      npm install body-parser
      npm install dotenv --save
+     npm i tsoa
+    **execute for create route file**
+     yarn run tsoa routes
 

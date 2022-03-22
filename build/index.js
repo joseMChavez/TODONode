@@ -34,15 +34,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const bodyParser = __importStar(require("body-parser"));
+const body_parser_1 = __importDefault(require("body-parser"));
 const dotenv = __importStar(require("dotenv"));
-const index_1 = __importDefault(require("./Application/controllers/todo/index"));
+const routes_1 = require("./routes");
 const mongoconfig_1 = __importDefault(require("./Infrastructure/database/mongodb/mongoconfig"));
-//import sweggerui from "swagger-ui-express";
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+//import * as swaggerDocument from './swagger.json'
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const app = (0, express_1.default)();
     dotenv.config();
     const PORT = process.env.PORT || 7000;
+    //const td = Container.get(TodoController);
     const con = new mongoconfig_1.default();
     con.Access();
     const allowedOrigins = ['*'];
@@ -50,8 +52,18 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         origin: allowedOrigins
     };
     app.use((0, cors_1.default)(options));
-    app.use(bodyParser.json());
-    app.use(index_1.default);
+    app.use('/swagger', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(undefined, {
+        swaggerOptions: {
+            url: "./swagger.json",
+        },
+    }));
+    app.use(body_parser_1.default.urlencoded({
+        extended: true,
+    }));
+    app.use(body_parser_1.default.json());
+    //app.use(express.static("public"));
+    (0, routes_1.RegisterRoutes)(app);
+    //app.use(router);
     //3000
     app.listen(PORT, () => {
         console.log('Server started....');

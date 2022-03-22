@@ -1,0 +1,13 @@
+{
+    "openapi": "3.0.0",
+    "swagger":"2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "TODO Node",
+        "description": "This is a Test",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    }
+}

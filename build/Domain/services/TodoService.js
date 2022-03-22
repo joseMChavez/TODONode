@@ -55,7 +55,7 @@ let TodoService = class TodoService {
     Delete(todo) {
         return new Promise((resolve, rejects) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const query = { name: todo.name, _id: todo.id };
+                const query = { name: todo.name, _id: todo._id };
                 const deleteResult = yield todo_1.default.deleteOne(query);
                 resolve(deleteResult.deletedCount > 0);
             }
@@ -64,10 +64,10 @@ let TodoService = class TodoService {
             }
         }));
     }
-    Get(todo) {
+    Get(id) {
         return new Promise((resolve, rejects) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const query = { name: todo.name, _id: todo._id };
+                const query = { _id: id };
                 const options = { upsert: true };
                 const dTodo = yield todo_1.default.findOne(query, options);
                 resolve(dTodo);
